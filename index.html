@@ -3,192 +3,27 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Safe External Link — Delayed Loader</title>
+  <title>Redirecting…</title>
+  <!-- Auto redirect after 3 seconds -->
+  <meta http-equiv="refresh" content="3;url=https://elevate00100.pythonanywhere.com">
   <style>
-    :root{--bg:#0f1724;--card:#0b1220;--accent:#06b6d4;--muted:#9ca3af}
-    *{box-sizing:border-box}
-    body{font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;line-height:1.4;margin:0;min-height:100vh;background:linear-gradient(180deg,#081126 0%,#071021 100%);color:#e6eef6;display:flex;align-items:center;justify-content:center;padding:24px}
-    .card{background:linear-gradient(180deg,var(--card),#041022);padding:28px;border-radius:12px;box-shadow:0 8px 30px rgba(2,6,23,.7);width:100%;max-width:720px}
-    h1{font-size:1.25rem;margin:0 0 8px}
-    p.lead{margin:0 0 18px;color:var(--muted)}
-    .controls{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
-    label{font-size:.9rem;color:var(--muted)}
-    input[type="url"], input[type="range"]{appearance:none;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,.04);background:rgba(255,255,255,.02);color:inherit;width:100%}
-    .row{display:flex;gap:12px}
-    .row > *{flex:1}
-    .btn{background:linear-gradient(90deg,var(--accent),#60a5fa);border:none;padding:10px 14px;border-radius:10px;font-weight:600;color:#042131;cursor:pointer}
-    .btn.secondary{background:transparent;border:1px solid rgba(255,255,255,.06);color:var(--muted)}
-    .loader-overlay{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(2,6,23,.6);backdrop-filter:blur(3px);z-index:9999}
-    .loader{background:#071427;padding:26px;border-radius:12px;box-shadow:0 10px 40px rgba(2,6,23,.7);display:flex;gap:18px;align-items:center}
-    .spinner{width:48px;height:48px;border-radius:50%;border:5px solid rgba(255,255,255,.08);border-top-color:var(--accent);animation:spin 1s linear infinite}
+    body{margin:0;display:flex;align-items:center;justify-content:center;height:100vh;background:#0f1724;color:#fff;font-family:sans-serif}
+    .loader{display:flex;flex-direction:column;align-items:center;gap:20px;text-align:center}
+    .logo{width:80px;height:80px;background:#06b6d4;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:bold;color:#0f1724}
+    .spinner{width:48px;height:48px;border-radius:50%;border:5px solid rgba(255,255,255,.15);border-top-color:#06b6d4;animation:spin 1s linear infinite}
     @keyframes spin{to{transform:rotate(360deg)}}
-    .count{font-size:1.25rem;font-weight:700}
-    .meta{color:var(--muted);font-size:.9rem}
-    .small{font-size:.85rem;color:var(--muted)}
-    footer{margin-top:16px;color:var(--muted);font-size:.8rem}
-    .danger{color:#ffb4b4}
-    /* accessible focus */
-    a:focus,button:focus,input:focus{outline:3px solid rgba(6,182,212,.15);outline-offset:3px}
+    .text{font-size:1.1rem;color:#9ca3af}
+    a{color:#06b6d4;text-decoration:none;font-weight:bold}
   </style>
 </head>
 <body>
-  <main class="card" role="main">
-    <h1>Open external site safely with a delayed loader</h1>
-    <p class="lead">This page will show a safe 3–4s loading screen before opening the external link in a <code>_blank</code> tab with <code>rel="noopener noreferrer"</code>. Use the slider to pick the delay.</p>
-
-    <div class="row">
-      <div>
-        <label for="url">Destination URL</label>
-        <input id="url" type="url" placeholder="https://example.com" value="https://elevate00100.pythonanywhere.com/" />
-      </div>
-      <div style="max-width:160px;min-width:140px">
-        <label for="delay">Delay (seconds)</label>
-        <input id="delay" type="range" min="1" max="6" step="0.5" value="3.5" />
-        <div class="small" style="margin-top:6px">Delay: <span id="delay-val">3.5</span>s</div>
-      </div>
-    </div>
-
-    <div style="height:12px"></div>
-    <div class="controls">
-      <button id="open-btn" class="btn">Open safely</button>
-      <button id="copy-btn" class="btn secondary">Copy link</button>
-      <a id="direct" class="btn secondary" href="#" target="_blank" rel="noopener noreferrer">Open direct (no delay)</a>
-    </div>
-
-    <footer>
-      <div class="small">Notes: The site will open in a new tab. If JavaScript is disabled, use the direct link above. We use <code>rel="noopener noreferrer"</code> to prevent the opened page from accessing this tab via <code>window.opener</code>.</div>
-    </footer>
-  </main>
-
-  <!-- Loader overlay (hidden by default) -->
-  <div id="overlay" class="loader-overlay" style="display:none" aria-hidden="true">
-    <div class="loader" role="alert" aria-live="assertive">
-      <div class="spinner" aria-hidden="true"></div>
-      <div>
-        <div class="count" id="countdown">3.5</div>
-        <div class="meta">Opening in <span id="countdown-label">3.5</span> seconds…</div>
-        <div style="height:8px"></div>
-        <div style="display:flex;gap:8px;margin-top:8px">
-          <button id="cancel-btn" class="btn secondary">Cancel</button>
-        </div>
-      </div>
+  <div class="loader">
+    <div class="logo">L</div>
+    <div class="spinner"></div>
+    <div class="text">
+      Please wait… redirecting<br>
+      If not redirected, <a href="https://elevate00100.pythonanywhere.com/" target="_blank" rel="noopener noreferrer">click here</a>.
     </div>
   </div>
-
-  <script>
-    (function(){
-      const urlInput = document.getElementById('url');
-      const delayRange = document.getElementById('delay');
-      const delayVal = document.getElementById('delay-val');
-      const openBtn = document.getElementById('open-btn');
-      const copyBtn = document.getElementById('copy-btn');
-      const direct = document.getElementById('direct');
-      const overlay = document.getElementById('overlay');
-      const countdownEl = document.getElementById('countdown');
-      const countdownLabel = document.getElementById('countdown-label');
-      const cancelBtn = document.getElementById('cancel-btn');
-
-      function normalizeUrl(u){
-        try{
-          // If user enters without protocol, assume https
-          const parsed = new URL(u, window.location.href);
-          if(!parsed.protocol || parsed.protocol === ':') parsed.protocol = 'https:';
-          return parsed.href;
-        }catch(e){
-          // try adding https:// if plain domain
-          try{ return new URL('https://' + u).href }catch(e2){ return null }
-        }
-      }
-
-      function updateDirectHref(){
-        const normalized = normalizeUrl(urlInput.value.trim());
-        if(normalized){
-          direct.href = normalized;
-        } else {
-          direct.href = '#';
-        }
-      }
-
-      delayRange.addEventListener('input', ()=>{
-        delayVal.textContent = delayRange.value;
-        countdownEl.textContent = delayRange.value;
-        countdownLabel.textContent = delayRange.value;
-      });
-
-      urlInput.addEventListener('change', updateDirectHref);
-      urlInput.addEventListener('input', updateDirectHref);
-      updateDirectHref();
-
-      copyBtn.addEventListener('click', async ()=>{
-        const normalized = normalizeUrl(urlInput.value.trim());
-        if(!normalized) return alert('Please enter a valid URL');
-        try{ await navigator.clipboard.writeText(normalized); alert('Link copied to clipboard'); }
-        catch(e){ alert('Unable to copy. Here's the link: ' + normalized); }
-      });
-
-      let timerId = null;
-      let remaining = 0;
-
-      openBtn.addEventListener('click', ()=>{
-        const normalized = normalizeUrl(urlInput.value.trim());
-        if(!normalized){ alert('Please enter a valid destination URL.'); return; }
-
-        // Show overlay and start countdown
-        remaining = parseFloat(delayRange.value);
-        overlay.style.display = 'flex';
-        overlay.setAttribute('aria-hidden','false');
-        countdownEl.textContent = remaining.toFixed(1);
-        countdownLabel.textContent = remaining.toFixed(1);
-
-        // start interval tick every 100ms for smooth countdown
-        const start = performance.now();
-        const total = remaining * 1000;
-
-        timerId = setInterval(()=>{
-          const elapsed = performance.now() - start;
-          const left = Math.max(0, (total - elapsed)/1000);
-          countdownEl.textContent = left.toFixed(1);
-          countdownLabel.textContent = left.toFixed(1);
-          if(left <= 0){
-            clearInterval(timerId); timerId = null;
-            // open the link in a safe way
-            try{
-              const a = document.createElement('a');
-              a.href = normalized;
-              a.target = '_blank';
-              a.rel = 'noopener noreferrer';
-              // append, click, remove — ensures browser opens a new tab/window safely
-              a.style.display = 'none';
-              document.body.appendChild(a);
-              a.click();
-              document.body.removeChild(a);
-            }catch(e){
-              // fallback
-              window.open(normalized, '_blank');
-            }
-            overlay.style.display = 'none';
-            overlay.setAttribute('aria-hidden','true');
-          }
-        }, 100);
-      });
-
-      cancelBtn.addEventListener('click', ()=>{
-        if(timerId){ clearInterval(timerId); timerId = null; }
-        overlay.style.display = 'none';
-        overlay.setAttribute('aria-hidden','true');
-      });
-
-      // close overlay if user presses Escape
-      window.addEventListener('keydown',(e)=>{ if(e.key === 'Escape'){ cancelBtn.click(); } });
-
-      // Accessibility: if user right-clicks direct link and chooses open, it's still safe due to rel
-      // Progressive enhancement: ensure at least a usable link exists when JS disabled
-    })();
-  </script>
-
-  <!-- No-JS fallback notice -->
-  <noscript>
-    <div style="position:fixed;left:16px;bottom:16px;background:#081426;padding:10px;border-radius:8px;color:#ffdcdc;font-size:.95rem">JavaScript is disabled — use the direct link above to open the destination.</div>
-  </noscript>
 </body>
 </html>
